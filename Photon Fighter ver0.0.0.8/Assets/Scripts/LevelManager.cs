@@ -109,12 +109,12 @@ public class LevelManager : MonoBehaviour
 
         if (playing = true && player != null)
         {
-            /*
+            
             if (sceneActiveDuration - sceneTime <= 0)
             {
                 LoadNextScene();
             }
-            */
+            
 
             if (playerHealth.health > 3)
             {

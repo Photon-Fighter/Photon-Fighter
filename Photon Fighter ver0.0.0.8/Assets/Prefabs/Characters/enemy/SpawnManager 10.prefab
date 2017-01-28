@@ -55,7 +55,7 @@ MonoBehaviour:
   spawnTime: 2
   delay: 2
   spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4550647862660694, guid: 990893759e5eb9a4185603993dd065bb, type: 2}
+  - {fileID: 4312431640663148, guid: 990893759e5eb9a4185603993dd065bb, type: 2}
+  - {fileID: 4186495727868808, guid: 990893759e5eb9a4185603993dd065bb, type: 2}
+  - {fileID: 4775321676995732, guid: 990893759e5eb9a4185603993dd065bb, type: 2}

@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4689165222229044}
-  - component: {fileID: 114799960122854004}
-  - component: {fileID: 114509030092466552}
+  - component: {fileID: 114447415046872486}
+  - component: {fileID: 114772385324402480}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114509030092466552
+--- !u!114 &114447415046872486
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,7 +49,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1462340236363242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d7c508b011a544aa5f19389f0416b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bb07078444776e4d88f8a1438f4d3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicProjectile: {fileID: 1084987554314764, guid: 3fe7c85ce82b6bd44ae47604d05cd851,
+    type: 2}
+  projectileSpeed: 200
+  amplitudeHorizontal: 0
+  amplitudeSpeed: 0
+  projectileDamage: 3
+  color: 0
+--- !u!114 &114772385324402480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462340236363242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb07078444776e4d88f8a1438f4d3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   basicProjectile: {fileID: 1680277584328988, guid: 2a240f832f5f1b544a24a0ce9390a982,
@@ -57,23 +75,5 @@ MonoBehaviour:
   projectileSpeed: 300
   amplitudeHorizontal: 20
   amplitudeSpeed: 15
-  projectileDamage: 5
+  projectileDamage: 1
   color: 1
---- !u!114 &114799960122854004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1462340236363242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea1e49aed5d607e43b23903e0953e98e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  basicProjectile: {fileID: 1084987554314764, guid: 3fe7c85ce82b6bd44ae47604d05cd851,
-    type: 2}
-  projectileSpeed: 300
-  amplitudeHorizontal: 0
-  amplitudeSpeed: 15
-  projectileDamage: 15
-  color: 0

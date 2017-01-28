@@ -21,7 +21,14 @@ public class WeaponBase : MonoBehaviour {
 		}
 
 		Weapons.Weapon newWeapon = new Weapons.Weapon();
-		Weapons.weapons.Add(color, newWeapon);
+
+        // only add weapon if it doesn't exist
+        if (!Weapons.weapons.ContainsKey(color))
+        {
+            Weapons.weapons.Add(color, newWeapon);
+        }
+
+        Debug.Log("Added weapon color" + color);
 
 		newWeapon.amplitudeHorizontal = amplitudeHorizontal;
 		newWeapon.amplitudeSpeed = amplitudeSpeed;

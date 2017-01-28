@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 300
   projectileTime: 10
-  color: 0
+  color: 1
 --- !u!135 &135587080961317462
 SphereCollider:
   m_ObjectHideFlags: 1

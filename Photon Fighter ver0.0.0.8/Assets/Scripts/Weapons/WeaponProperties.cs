@@ -6,12 +6,6 @@ public static class Weapons {
 
 	public static Dictionary<PhotonColor, Weapon> weapons;
 
-	/*public enum WeaponColor {
-		Red,
-		Green,
-		Blue
-	}*/
-
 	public class Weapon {
 		public GameObject projectile;
 		public float projectileSpeed;

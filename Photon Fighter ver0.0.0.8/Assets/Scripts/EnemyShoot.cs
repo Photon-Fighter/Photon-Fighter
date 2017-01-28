@@ -10,8 +10,18 @@ public class EnemyShoot : MonoBehaviour {
     public float shootDelay = 5.0f;
 
     private float currentTime = 0.0f;
+
+    private GameObject projectileParent; // tidy up all projectiles in a empty parent
+
+
 	// Use this for initialization
 	void Start () {
+        projectileParent = GameObject.Find("Projectiles");
+        if (!projectileParent)
+        {
+            projectileParent = new GameObject("Projectiles");
+        }
+
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
@@ -26,7 +36,8 @@ public class EnemyShoot : MonoBehaviour {
             currentTime = 0.0f;
             if (player != null)
             {
-                Instantiate(projectile, gunLocation.transform.position, gunLocation.transform.rotation);
+                GameObject clone = (GameObject)Instantiate(projectile, gunLocation.transform.position, gunLocation.transform.rotation);
+                clone.transform.parent = projectileParent.transform;
             }
         }
         else

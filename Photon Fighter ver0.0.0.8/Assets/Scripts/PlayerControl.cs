@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 
-	public GameObject projectile; // TODO: create separate script for this?
+	public GameObject projectile;
+    private GameObject projectileParent; // tidy up all projectiles in a empty parent
 
-	public GameObject gunLocation;
+    public GameObject gunLocation;
 
 	public float moveSpeed = 20.0f;
 	public float rotationSpeed = 5.0f;
@@ -18,19 +19,25 @@ public class PlayerControl : MonoBehaviour {
 	private int curWeapon = 0;
 	private int maxWeapons;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
+        projectileParent = GameObject.Find("Projectiles");
+        if(!projectileParent)
+        {
+            projectileParent = new GameObject("Projectiles");
+        }
+
 		rb = GetComponent<Rigidbody>();
 
 		if(!rb) {
 			Debug.LogError(name + " doesn't have a rigidbody component");
 		}
 
-		EquipWeapon();
-
 		maxWeapons = System.Enum.GetNames(typeof(PhotonColor)).Length;
 		Debug.Log("number of weapons: " + System.Enum.GetNames(typeof(PhotonColor)).Length);
-	}
+
+        EquipWeapon();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,6 +53,7 @@ public class PlayerControl : MonoBehaviour {
 	void Shoot() {
 		if(Input.GetMouseButtonDown(0)) {
 			GameObject proj = (GameObject)Instantiate(projectile, gunLocation.transform.position, gunLocation.transform.rotation);
+            proj.transform.parent = projectileParent.transform;
 		}
 	}
 
@@ -70,28 +78,43 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void EquipWeapon() {
-		//myWeapon = Weapons.weapons[(PhotonColor)(curWeapon / System.Enum.GetNames(typeof(PhotonColor)).Length)];
-		myWeapon = Weapons.weapons[(PhotonColor)curWeapon];
-		projectile = myWeapon.projectile;
+        // make sure our weapons have been instantiated
+        if (Weapons.weapons != null)
+        {
+            myWeapon = Weapons.weapons[(PhotonColor)curWeapon];
+            projectile = myWeapon.projectile;
 
-		Debug.Log("Changed weapon to: " + projectile.name + " " + myWeapon.color);
+            Debug.Log("Changed weapon to: " + projectile.name + " " + myWeapon.color);
+        }
 	}
 
 	// logic to check for player rotation and movement
 	void MovePlayer() {
-		if(Input.GetKey(KeyCode.A)) {
-			transform.RotateAround(transform.position, Vector3.up, -rotationSpeed);
-		}
+
+        // The directions seem off here because of the orientation of the camera.
+        // It is looking at the world from the +x direction
+        // because of this, the directions are as follows, from the player's perspective:
+        //      a = Vector3.back (-z)
+        //      d = Vector3.forward (+z)
+        //      w = Vector3.left (-x)
+        //      s = Vector3.right (+x)
+        if (Input.GetKey(KeyCode.A)) {
+            //transform.RotateAround(transform.position, Vector3.up, -rotationSpeed);
+            MoveTowards(Vector3.back);
+        }
 		else if(Input.GetKey(KeyCode.D)) {
-			transform.RotateAround(transform.position, Vector3.up, rotationSpeed);
-		}
+            //transform.RotateAround(transform.position, Vector3.up, rotationSpeed);
+            MoveTowards(Vector3.forward);
+        }
 
 		if(Input.GetKey(KeyCode.W)) {
-			MoveTowards(transform.forward);
-		}
+            //MoveTowards(transform.forward);
+            MoveTowards(Vector3.left);
+        }
 		else if(Input.GetKey(KeyCode.S)) {
-			MoveTowards(-transform.forward);
-		}
+            //MoveTowards(-transform.forward);
+            MoveTowards(Vector3.right);
+        }
 	}
 
 	// denote the direction to move the player
