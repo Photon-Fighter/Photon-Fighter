@@ -9,8 +9,8 @@ public class Health : MonoBehaviour {
     public AudioClip DeathAudio;
     AudioSource enemyAudio;
 
+    private GameObject particleParent; // tidy particle systems into parent object
 
-    
     void Awake()
     {
         if (DeathEffect == null)
@@ -22,6 +22,12 @@ public class Health : MonoBehaviour {
             DeathAudio = GetComponent<AudioClip>();
         }
         enemyAudio = GetComponent<AudioSource>();
+
+        particleParent = GameObject.Find("ParticleSystems");
+        if (!particleParent)
+        {
+            particleParent = new GameObject("ParticleSystems");
+        }
     }
 
     // function to damage someone with the Health component
@@ -56,7 +62,8 @@ public class Health : MonoBehaviour {
 
 
         DeathEffect.Play();
-        Instantiate(DeathEffect, transform.position, transform.rotation);
+        ParticleSystem clone = (ParticleSystem)Instantiate(DeathEffect, transform.position, transform.rotation);
+        clone.transform.parent = particleParent.transform;
         Destroy(gameObject);
 		//}
 	}

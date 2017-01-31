@@ -8,14 +8,23 @@ public class EnemySpawn : MonoBehaviour {
     public float spawnTime;
     public float delay = 0;
     public Transform[] spawnPoints;
+
+    private GameObject enemyParent; // tidy up all enemies in a empty parent
+
 	// Use this for initialization
 	void Start () {
+        enemyParent = GameObject.Find("Enemies");
+        if (!enemyParent)
+        {
+            enemyParent = new GameObject("Enemies");
+        }
+
         InvokeRepeating("Spawn", delay, spawnTime); //Second param is start delay
         if(player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
-       }
+    }
 	
 	// Update is called once per frame
 	void Spawn () {
@@ -24,7 +33,8 @@ public class EnemySpawn : MonoBehaviour {
         //{
         if (player != null)
         {
-            Instantiate(enemy, spawnPoints[spawnPointInd].position, spawnPoints[spawnPointInd].rotation);
+            GameObject clone = (GameObject)Instantiate(enemy, spawnPoints[spawnPointInd].position, spawnPoints[spawnPointInd].rotation);
+            clone.transform.parent = enemyParent.transform;
         }
         //}
 	}
